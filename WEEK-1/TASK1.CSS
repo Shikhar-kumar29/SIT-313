@@ -1,0 +1,144 @@
+
+a{
+    color: aqua;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right:20px ;
+
+}
+
+#header
+{
+     height: 900px;
+}
+
+.header-image {
+  position: relative;
+  width: 100%;
+}
+
+.header-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hover-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.header-image:hover .hover-caption {
+  opacity: 1;
+}
+ 
+.profilephoto
+{
+    display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+#photo
+{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+
+    
+}
+
+
+.ptag
+{
+    color: aqua;
+}
+
+
+
+.belowphoto
+{
+    text-align: center;
+    color: blue;
+    font-size: 25px;
+}
+
+#projectphoto
+{
+ height:300px;    
+}
+
+.project
+{
+     display: flex;
+  justify-content: center; 
+  align-items: center; 
+
+}
+
+#para1
+{
+    font-size: 20px;
+    color:blue;
+}
+
+#arduinoimage
+{
+      display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+#para2
+{
+    font-size: 20px;
+    color:blue;
+}
+
+#para3
+{
+ font-size: 50px;
+    color:blue;   
+}
+
+.photos
+{
+     display: flex;
+  justify-content: center; 
+  align-items: center; 
+
+}
+
+.gallery {
+  padding: 20px;
+  text-align: center;
+}
+
+.gallery h2 {
+  margin-bottom: 20px;
+  color: teal;
+}
+
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery-container img {
+  width: 100%;
+  max-width: 200px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  height: auto;
+}
