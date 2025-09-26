@@ -1,0 +1,125 @@
+/* 7.1P Custom Styles */
+.app-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+}
+.form-card, .login-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 28px;
+  width: 100%;
+  max-width: 400px;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.form-card h2 {
+  margin-bottom: 12px;
+  font-size: 1.5rem;
+  color: #2d3748;
+}
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.input.large-input {
+  padding: 10px 12px;
+  border: 1px solid #bfc8d6;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f7fafc;
+  transition: border 0.2s;
+}
+.input.large-input:focus {
+  border-color: #3182ce;
+  outline: none;
+}
+.btn-primary.large-btn {
+  background: linear-gradient(90deg, #3182ce 0%, #63b3ed 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary.large-btn:hover {
+  background: linear-gradient(90deg, #2563eb 0%, #4299e1 100%);
+}
+.error {
+  color: #e53e3e;
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 6px;
+  padding: 8px;
+  margin-top: 8px;
+  text-align: center;
+}
+.signup-container {
+  text-align: center;
+  margin-top: 10px;
+}
+.signup-link {
+  color: #3182ce;
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+}
+/* Navbar styles for App.jsx */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.navbar strong {
+  font-size: 1.2rem;
+  color: #2b6cb0;
+}
+.navbar input[type="text"] {
+  flex: 1;
+  margin: 0 16px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #bfc8d6;
+  background: #f7fafc;
+}
+.navbar a {
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 12px;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+/* Home page styles */
+.home-container {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.home-container h2 {
+  color: #2d3748;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+.home-container p {
+  color: #4a5568;
+  font-size: 1.1rem;
+}
