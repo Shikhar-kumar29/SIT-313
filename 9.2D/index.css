@@ -1,0 +1,116 @@
+:root{
+  --bg:#ffffff;
+  --surface:#f7f8fa;
+  --muted:#6b7280; /* gray-500 */
+  --border:#e6e9ee;
+  --blue:#1e63c6; /* primary blue */
+  --blue-dark:#184f9a;
+  --black:#0b1220;
+  --white:#ffffff;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background:var(--surface);
+  color:var(--black);
+  line-height:1.4;
+}
+
+.App{min-height:100%;background:var(--surface)}
+
+/* Container: centered and compact - eliminates large empty spaces */
+.page-container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:16px;
+  min-height:calc(100% - 56px); /* account for header/footer */
+}
+
+/* Cards & segments */
+.custom-card, .custom-segment, .ui.segment{
+  background:var(--white) !important;
+  border:1px solid var(--border) !important;
+  border-radius:8px !important;
+  box-shadow:0 1px 6px rgba(11,18,32,0.04) !important;
+  padding:14px !important;
+  margin:8px 0 !important; /* small spacing only */
+}
+
+.custom-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(11,18,32,0.08) !important}
+
+/* Typography helpers */
+.muted{color:var(--muted)}
+.lead{color:var(--black);font-weight:600}
+
+/* Navbar */
+.ui.menu{background:var(--white) !important;border-bottom:1px solid var(--border) !important;box-shadow:none;margin:0;padding:0;height:64px}
+.ui.menu > .container{display:flex;align-items:center;gap:16px;padding:0 12px;justify-content:flex-start}
+.ui.menu .item{color:var(--black);font-weight:600;margin:0 6px;padding:0 12px;height:64px;display:flex;align-items:center}
+.ui.menu .item .icon{margin-right:8px}
+.ui.menu .item.header{font-size:1.05rem;margin-right:14px}
+.ui.menu .item:hover{background:transparent;color:var(--blue)}
+.ui.menu .item.active{color:var(--blue)}
+
+/* inverted/colored menu (semantic-ui 'inverted blue' used in Navbar.jsx) */
+.ui.inverted.menu{background:var(--blue) !important;border-bottom:0 !important;color:var(--white)}
+.ui.inverted.menu .item{color:var(--white) !important}
+.ui.inverted.menu .item:hover{color:rgba(255,255,255,0.95) !important;background:rgba(255,255,255,0.03) !important}
+
+/* Buttons */
+.ui.button{border-radius:6px !important;padding:10px 14px !important;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+.ui.primary.button{background:var(--blue) !important;color:var(--white) !important;border:1px solid transparent !important}
+.ui.primary.button:hover{background:var(--blue-dark) !important}
+.ui.ghost.button{background:transparent !important;border:1px solid var(--border) !important;color:var(--black) !important}
+
+/* Forms */
+.ui.form .field{margin-bottom:10px}
+.ui.input input, .ui.form textarea, .StripeElement{
+  border-radius:6px !important;border:1px solid var(--border) !important;padding:10px;background:var(--white);width:100% !important
+}
+.ui.input input:focus, .ui.form textarea:focus, .StripeElement--focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,99,198,0.08)}
+
+/* Code editor */
+.cm-editor{border-radius:6px !important;overflow:hidden;border:1px solid var(--border)}
+
+/* Labels */
+.ui.label{border-radius:4px !important;padding:6px 8px !important;background:var(--surface);color:var(--muted)}
+
+/* Reduce default semantic UI spacing and make layout denser */
+.ui.container{padding-top:0 !important;padding-bottom:0 !important;margin:0 auto !important}
+.ui.grid>.row{padding:6px 0}
+
+/* Utility spacing */
+.no-gap{margin:0;padding:0}
+.compact{padding:8px}
+
+/* Responsive tweaks */
+@media (max-width:900px){
+  .page-container{padding:12px}
+  .ui.menu{padding:8px}
+  .custom-card,.custom-segment{padding:12px}
+}
+
+@media (max-width:480px){
+  .page-container{padding:10px}
+  .ui.menu .item{font-size:14px}
+}
+
+/* Responsive navbar wrapping */
+@media (max-width:700px){
+  .ui.menu{height:auto}
+  .ui.menu > .container{flex-wrap:wrap;padding:8px}
+  .ui.menu .item{height:auto;padding:8px 10px}
+}
+
+/* Small animation for entry */
+@keyframes a-slide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.animate-in{animation:a-slide .28s ease-out}
+
+/* Accessibility */
+:focus{outline:2px solid rgba(30,99,198,0.12);outline-offset:2px}
