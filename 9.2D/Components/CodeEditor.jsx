@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Dropdown, Segment } from 'semantic-ui-react';
+import { Dropdown, Segment, Button } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+import { isPremium } from '../utils/premium';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
@@ -22,6 +24,21 @@ const extensions = {
 
 function CodeEditor({ code, setCode }) {
   const [lang, setLang] = useState('javascript');
+  const navigate = useNavigate();
+  const userIsPremium = isPremium();
+
+  if (!userIsPremium) {
+    return (
+      <Segment className='custom-segment' textAlign='center'>
+        <p style={{ marginBottom: '1rem' }}>
+          The advanced code editor is a Premium feature. Upgrade to access it.
+        </p>
+        <Button primary onClick={() => navigate('/plans')}>
+          View Plans
+        </Button>
+      </Segment>
+    );
+  }
 
   return (
     <Segment className='custom-segment'>
