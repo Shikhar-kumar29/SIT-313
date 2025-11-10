@@ -1,24 +1,23 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
+// Firebase configuration using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyAnXz4uCYMTu_1zursNd3n9cRZ1HL1jYI0",
-  authDomain: "devdeakin-app-ddfe9.firebaseapp.com",
-  projectId: "devdeakin-app-ddfe9",
-  storageBucket: "devdeakin-app-ddfe9.firebasestorage.app",
-  messagingSenderId: "536456782989",
-  appId: "1:536456782989:web:59d9646d1786a83eef6ec4",
-  measurementId: "G-CW8XRVRYE0"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 }; 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase services
+// Initialize Firebase services (no Storage - using base64 in Firestore)
 export const db = getFirestore(app);
-export const storage = getStorage(app);
 export const auth = getAuth(app);
 
 export default app;
