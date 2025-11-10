@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Form, Checkbox } from 'semantic-ui-react';
+import { Form, Checkbox, Button } from 'semantic-ui-react';
 import CodeEditor from './CodeEditor';
 import MarkdownPreview from './MarkdownPreview';
+import { isPremium } from '../utils/premium';
 
 function ArticleForm({ title, setTitle, abstract, setAbstract, articleText, setArticleText, tags, setTags, code, setCode }) {
   const [showCode, setShowCode] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+
+  const userIsPremium = isPremium();
 
   return (
     <>
@@ -36,12 +39,16 @@ function ArticleForm({ title, setTitle, abstract, setAbstract, articleText, setA
       />
 
       <div style={{ marginBottom: '1rem' }}>
-        <Checkbox
-          label='Add code snippet'
-          checked={showCode}
-          onChange={() => setShowCode(!showCode)}
-          style={{ marginRight: '1.5rem' }}
-        />
+        {userIsPremium ? (
+          <Checkbox
+            label='Add code snippet'
+            checked={showCode}
+            onChange={() => setShowCode(!showCode)}
+            style={{ marginRight: '1.5rem' }}
+          />
+        ) : (
+          <Button basic size='tiny' onClick={() => window.location.assign('/plans')} style={{ marginRight: '1.5rem' }}>Upgrade for code</Button>
+        )}
         <Checkbox
           label='Show preview'
           checked={showPreview}
@@ -49,7 +56,7 @@ function ArticleForm({ title, setTitle, abstract, setAbstract, articleText, setA
         />
       </div>
 
-      {showCode && <CodeEditor code={code} setCode={setCode} />}
+      {showCode && userIsPremium && <CodeEditor code={code} setCode={setCode} />}
       {showPreview && <MarkdownPreview content={articleText} />}
 
       <Form.Input
