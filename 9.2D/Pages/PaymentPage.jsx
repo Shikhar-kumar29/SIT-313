@@ -3,7 +3,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from '../Components/CheckoutForm';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_YOUR_KEY');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_51SNeXjRhR4vvTveWXanJxSjOQbcQjSH7dkI3bV15Bn93kFfj17etx1wCid2gNBaYTwlv13E62xf9SDsyRdLEMBcW00uASmzoTS');
 
 function PaymentPage() {
   return (
