@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Form, Message, Segment, Header, Icon } from 'semantic-ui-react';
-import { db, storage } from '../Firebase/firebase-config';
+import { db } from '../Firebase/firebase-config';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import PostTypeSelector from './PostTypeSelector';
 import QuestionForm from './QuestionForm';
 import ArticleForm from './ArticleForm';
@@ -17,6 +16,7 @@ function CreatePost() {
   });
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageType, setImageType] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -31,45 +31,49 @@ function CreatePost() {
     setSuccess(false);
 
     try {
-      let imageUrl = null;
-      if (image) {
-        const imageRef = ref(storage, `images/${Date.now()}_${image.name}`);
-        await uploadBytes(imageRef, image);
-        imageUrl = await getDownloadURL(imageRef);
-      }
+      const imageData = imagePreview ? imagePreview.split(',')[1] ?? null : null;
 
       const postData = {
         type: postType,
         title: formData.title,
+        description: formData.description,
+        abstract: formData.abstract,
+        articleText: formData.articleText,
         tags: formData.tags.split(',').map(t => t.trim()).filter(Boolean),
+        code: formData.code?.trim() || null,
+        imageData,
+        imageType: imageData ? (imageType || image?.type || null) : null,
         createdAt: serverTimestamp(),
-        imageUrl,
-        code: formData.code || null
       };
 
-      if (postType === 'question') {
-        postData.description = formData.description;
-        await addDoc(collection(db, 'questions'), postData);
-      } else {
-        postData.abstract = formData.abstract;
-        postData.articleText = formData.articleText;
-        await addDoc(collection(db, 'articles'), postData);
+      if (!postData.imageData) {
+        delete postData.imageData;
+        delete postData.imageType;
       }
 
+      if (postData.tags.length === 0) {
+        delete postData.tags;
+      }
+
+      if (!postData.code) {
+        delete postData.code;
+      }
+
+      await addDoc(collection(db, 'posts'), postData);
       setSuccess(true);
-      setTimeout(() => {
-        setFormData({ title: '', description: '', tags: '', abstract: '', articleText: '', code: '' });
-        setImage(null);
-        setImagePreview(null);
-        setSuccess(false);
-      }, 2000);
+      setFormData({ title: '', description: '', tags: '', abstract: '', articleText: '', code: '' });
+      setImage(null);
+      setImagePreview(null);
+      setImageType(null);
     } catch (err) {
-      setError(err.message);
+      console.error('Error creating post:', err);
+      setError('Failed to create post. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  // ✅ The JSX return should be here, outside handleSubmit
   return (
     <div className='page-container animate-in'>
       <Segment className='custom-segment' style={{ padding: '2rem' }}>
@@ -132,6 +136,8 @@ function CreatePost() {
             setImage={setImage}
             imagePreview={imagePreview}
             setImagePreview={setImagePreview}
+            setImageType={setImageType}
+            setError={setError}
           />
 
           <SubmitButton loading={loading} />
