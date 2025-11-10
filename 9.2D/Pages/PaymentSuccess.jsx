@@ -1,8 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import { Container, Segment, Header, Icon, Button, List } from 'semantic-ui-react';
+import { useEffect } from 'react';
+import { setPremium } from '../utils/premium';
+import { useAuth } from '../context/AuthContext';
 
 function PaymentSuccess() {
   const navigate = useNavigate();
+  const { user, refreshPremium } = useAuth();
+
+  useEffect(() => {
+    // ensure premium flag is set when user lands here (in case payment flow redirected)
+    const email = (() => {
+      try { return localStorage.getItem('premiumEmail'); } catch { return null; }
+    })();
+
+    // set local premium flag and try to persist
+    const targetEmail = user?.email || email;
+    setPremium(targetEmail).catch((e) => console.error(e));
+    refreshPremium?.().catch((e) => console.error('Failed to refresh premium after payment:', e));
+  }, [user?.email, refreshPremium]);
 
   return (
     <div className='page-container animate-in'>
